@@ -6,6 +6,7 @@ import 'package:third_flutter/2_applications/pages/advice/bloc/advicer_bloc.dart
 import 'package:third_flutter/2_applications/pages/advice/widgets/advice_field.dart';
 import 'package:third_flutter/2_applications/pages/advice/widgets/custom_button.dart';
 import 'package:third_flutter/2_applications/pages/advice/widgets/error_message.dart';
+import 'package:third_flutter/2_applications/pages/theme_switcher/theme_switcher_page.dart';
 import 'package:third_flutter/injection.dart';
 
 class AdvicerPageWrapperProvider extends StatelessWidget {
@@ -31,12 +32,21 @@ class AdvicePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Advicer', style: themeData.textTheme.headlineLarge),
         actions: [
-          Switch(
-            value: Provider.of<ThemeService>(context).isDarkModeOn,
-            onChanged: (_) {
-              Provider.of<ThemeService>(context, listen: false).toggleTheme();
-            },
-          )
+          // Switch(
+          //   value: Provider.of<ThemeService>(context).isDarkModeOn,
+          //   onChanged: (_) {
+          //     Provider.of<ThemeService>(context, listen: false).toggleTheme();
+          //   },
+          // ),
+          IconButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return ThemeSwitcherPage();
+                }));
+              },
+              icon: Icon(
+                Icons.settings, color: themeData.colorScheme.tertiary,
+              ),)
         ],
       ),
       body: Padding(
@@ -59,15 +69,13 @@ class AdvicePage extends StatelessWidget {
                   } else if (state is AdvicerStateLoaded) {
                     return AdviceField(advice: state.advice);
                   } else if (state is AdvicerStateError) {
-                    return ErrorMessage(
-                      message: state.message);
+                    return ErrorMessage(message: state.message);
                   }
                   return SizedBox();
                   // return const ErrorMessage(
                   //     message: "Oops omething gone wrong!\n\n - error 404 -");
                 },
               ),
-              
             ),
           ),
           const SizedBox(
