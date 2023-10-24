@@ -6,6 +6,7 @@ import 'package:third_flutter/2_applications/pages/advice/bloc/advicer_bloc.dart
 import 'package:third_flutter/2_applications/pages/advice/widgets/advice_field.dart';
 import 'package:third_flutter/2_applications/pages/advice/widgets/custom_button.dart';
 import 'package:third_flutter/2_applications/pages/advice/widgets/error_message.dart';
+import 'package:third_flutter/injection.dart';
 
 class AdvicerPageWrapperProvider extends StatelessWidget {
   const AdvicerPageWrapperProvider({super.key});
@@ -13,7 +14,7 @@ class AdvicerPageWrapperProvider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AdvicerBloc(),
+      create: (context) => sl<AdvicerBloc>(),
       child: const AdvicePage(),
     );
   }
