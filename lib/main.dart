@@ -21,10 +21,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeService>(builder: (context, ThemeService, child) {
+    return Consumer<ThemeService>(builder: (context, themeService, child) {
       return MaterialApp(
         debugShowCheckedModeBanner: false,
-        themeMode: ThemeService.isDarkModeOn ? ThemeMode.dark : ThemeMode.light,
+        themeMode: themeService.isDarkModeOn ? ThemeMode.dark : ThemeMode.light,
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
         home: const AdvicerPageWrapperProvider(),
